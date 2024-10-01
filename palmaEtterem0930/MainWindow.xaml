@@ -5,6 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:palmaEtterem0930"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Label x:Name="Ajanlat" Content="Mai ajánlatunk:" HorizontalAlignment="Left" Height="76" Margin="38,40,0,0" VerticalAlignment="Top" Width="252"/>
+        Title="Pálma étterem" Height="450" Width="800">
+    <Grid>
+        <Label x:Name="Ajanlat" Content="Mai ajánlatunk:" HorizontalAlignment="Left" Height="41" Margin="38,40,0,0" VerticalAlignment="Top" Width="252"/>
+        <Label x:Name="dijnyertes" Content="féle díjnyertes édességből választhat." HorizontalAlignment="Left" Height="33" Margin="38,86,0,0" VerticalAlignment="Top" Width="252"/>
+        <Label Content="Legdrágább desszertünk: " HorizontalAlignment="Left" Height="33" Margin="38,135,0,0" VerticalAlignment="Top" Width="252"/>
+        <Label x:Name="legdragabb" Content="" HorizontalAlignment="Left" Height="30" Margin="38,168,0,0" VerticalAlignment="Top" Width="282"/>
+        <Label Content="Legolcsóbb desszertünk: " HorizontalAlignment="Left" Height="33" Margin="38,217,0,0" VerticalAlignment="Top" Width="252"/>
+        <Label x:Name="legolcsobb" Content="" HorizontalAlignment="Left" Height="30" Margin="38,255,0,0" VerticalAlignment="Top" Width="282"/>
+
+    </Grid>
 </Window>

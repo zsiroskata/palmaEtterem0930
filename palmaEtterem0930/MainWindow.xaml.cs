@@ -38,7 +38,29 @@ namespace palmaEtterem0930
                 Ajanlat.Content = "Mai ajánlatunk: " + sutik[rnd.Next(0, sutik.Count)].Nev;
             }
 
+            //Harmadik feladat
+            //legdrágább süti
+            var max = sutik.MaxBy(x => x.Ar);
+            int index = sutik.IndexOf(max);
+            legdragabb.Content = $"{sutik[index].Nev} {sutik[index].Ar}ft/{sutik[index].Ertekesites}";
 
+            //legolcsóbb süti
+            var min = sutik.MinBy(x => x.Ar);
+            index = sutik.IndexOf(min);
+            legolcsobb.Content= $"{sutik[index].Nev} {sutik[index].Ar}ft/{sutik[index].Ertekesites}";
+
+            //Negyedik feladat
+            int dijnyertesSzam=0;
+            for (int i = 0; i < sutik.Count; i++)
+            {
+                if (sutik[i].Verseny)
+                {
+                    dijnyertesSzam++;
+                }
+            }
+            dijnyertes.Content = $"{dijnyertesSzam} féle díjnyertes édességből választhat.";
+
+            //Ötödik feladat
         }
     }
 }
