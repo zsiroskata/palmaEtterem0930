@@ -61,6 +61,38 @@ namespace palmaEtterem0930
             dijnyertes.Content = $"{dijnyertesSzam} féle díjnyertes édességből választhat.";
 
             //Ötödik feladat
+            List<string> desszertekLista = new();
+            string path = @"..\..\..\src\lista.txt";
+            using (StreamWriter sw = new StreamWriter(path))
+            {
+                foreach (var x in sutik)
+                {
+                    if (!desszertekLista.Contains(x.Nev))
+                    {
+                        sw.WriteLine($"{x.Nev} – {x.Tipus}");
+                        desszertekLista.Add(x.Nev);
+                    }
+                }
+            }
+
+            //Hatodik feladat
+            List<string> hatodikF = new();
+            var tipusok = sutik.OrderBy(d => d.Tipus);
+            path = @"..\..\..\src\stat.txt";
+            using (StreamWriter sw = new StreamWriter(path))
+            {
+                foreach (var x in sutik)
+                {
+                    if (!hatodikF.Contains(x.Tipus))
+                    {
+                        sw.WriteLine($"{x.Tipus}");
+                        hatodikF.Add(x.Tipus);
+                    }
+                }
+
+            }
+
+
         }
     }
 }
