@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -47,10 +47,10 @@ namespace palmaEtterem0930
             //legolcsóbb süti
             var min = sutik.MinBy(x => x.Ar);
             index = sutik.IndexOf(min);
-            legolcsobb.Content= $"{sutik[index].Nev} {sutik[index].Ar}ft/{sutik[index].Ertekesites}";
+            legolcsobb.Content = $"{sutik[index].Nev} {sutik[index].Ar}ft/{sutik[index].Ertekesites}";
 
             //Negyedik feladat
-            int dijnyertesSzam=0;
+            int dijnyertesSzam = 0;
             for (int i = 0; i < sutik.Count; i++)
             {
                 if (sutik[i].Verseny)
@@ -76,22 +76,62 @@ namespace palmaEtterem0930
             }
 
             //Hatodik feladat
-            List<string> hatodikF = new();
-            var tipusok = sutik.OrderBy(d => d.Tipus);
+            Dictionary<string, int> tipusSzamlalo = new Dictionary<string, int>();
+            foreach (var x in sutik)
+            {
+                if (tipusSzamlalo.ContainsKey(x.Tipus))
+                {
+                    tipusSzamlalo[x.Tipus]++;
+                }
+                else
+                {
+                    tipusSzamlalo[x.Tipus] = 1;
+                }
+            }
+
             path = @"..\..\..\src\stat.txt";
+            using (StreamWriter sw = new StreamWriter(path))
+            {
+                foreach (var x in tipusSzamlalo)
+
+                    sw.WriteLine($"{x.Key} - {x.Value}");
+            }
+           
+
+    }
+
+        private void arajanlatButton_Click(object sender, RoutedEventArgs e)
+        {
+            //Hetes feladat
+            string keresetSuti = tipusTextBox.Text;
+            bool hiba = false;
+            double atlag = 0;
+            List<string> lista = new();
+            string path = @"..\..\..\src\ajanlat.txt";
             using (StreamWriter sw = new StreamWriter(path))
             {
                 foreach (var x in sutik)
                 {
-                    if (!hatodikF.Contains(x.Tipus))
+                    if (x.Tipus.ToLower() == keresetSuti.ToLower())
                     {
-                        sw.WriteLine($"{x.Tipus}");
-                        hatodikF.Add(x.Tipus);
+                        sw.WriteLine($"{x.Nev} - {x.Ar} – {x.Ertekesites}");
+                        hiba = true;
+                        atlag += x.Ar;
+                        if (!lista.Contains(x.Nev))
+                        {
+                            lista.Add(x.Nev);
+                        }
                     }
                 }
-
             }
-
+            if (!hiba)
+            {
+                MessageBox.Show("Nincs ilyen típusú desszertünk. Kérjük,válasszon mást");
+            }
+            else
+            {
+                MessageBox.Show($"{lista.Count} db desszert van, ezeknek az átlaga {Math.Round( atlag/lista.Count, 0)}Ft");
+            }
 
         }
     }
